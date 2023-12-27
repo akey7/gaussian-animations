@@ -1,6 +1,6 @@
+import os
 import matplotlib.pyplot as plt
 import numpy as np
-
 import matplotlib.animation as animation
 
 fig, ax = plt.subplots()
@@ -32,4 +32,4 @@ def update(frame):
 
 
 ani = animation.FuncAnimation(fig=fig, func=update, frames=40, interval=30)
-ani.save(filename="/tmp/ffmpeg_example.mp4", writer="ffmpeg")
+ani.save(filename="output/ffmpeg_example.mp4", writer="ffmpeg")
