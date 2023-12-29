@@ -50,6 +50,11 @@ def main():
 
     fig = plt.figure()
     ax = fig.add_subplot(111, projection='3d')
+    ax.set_facecolor(bgcolor)
+    fig.set_facecolor(bgcolor)
+    ax.tick_params(axis="x", colors=axis_color)
+    ax.tick_params(axis="y", colors=axis_color)
+    ax.tick_params(axis="z", colors=axis_color)
 
     def init_func():
         xs, ys, zs = two_d_gaussian(x0=x0_steps[0], y0=y0_steps[0], var_x=var_x_steps[0], var_y=var_y_steps[0], a=a_steps[0])
