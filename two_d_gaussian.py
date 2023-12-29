@@ -45,26 +45,29 @@ def main():
     x0_steps = np.concatenate([np.linspace(-4, 0, frames // 3), np.zeros(frames // 3), np.linspace(0, 4, frames // 3)])
     y0_steps = np.concatenate([np.linspace(-4, 0, frames // 3), np.zeros(frames // 3), np.linspace(0, 4, frames // 3)])
 
-    fig, axs = plt.subplots(nrows=1, ncols=1, figsize=(width, height), dpi=dpi, subplot_kw={"projection": "3d"})
+    # fig, axs = plt.subplots(nrows=1, ncols=1, figsize=(width, height), dpi=dpi, subplot_kw={"projection": "3d"})
+    fig = plt.figure()
+    ax = fig.add_subplot(111, projection='3d')
 
     def init_func():
         xs, ys, zs = two_d_gaussian(x0=x0_steps[0], y0=y0_steps[0])
         xs, ys = np.meshgrid(xs, ys)
-        axs.set_xlabel("x", size=15)
-        axs.set_ylabel("y", size=15)
-        axs.set_zlabel("z", size=15)
-        sfc = axs.plot_surface(ys, xs, zs, cmap=cm.plasma, linewidth=0, antialiased=True)
+        ax.set_xlabel("x", size=15)
+        ax.set_ylabel("y", size=15)
+        ax.set_zlabel("z", size=15)
+        sfc = ax.plot_surface(xs, ys, zs, cmap=cm.plasma, linewidth=0, antialiased=True)
         return sfc,
 
     def update(frame):
-        start_time = int(time.time() * 1000)
+        for coll in ax.collections:
+            coll.remove()
         xs, ys, zs = two_d_gaussian(x0=x0_steps[frame], y0=y0_steps[frame])
-        sfc = axs.plot_surface(ys, xs, zs, cmap=cm.plasma, linewidth=0, antialiased=True)
-        end_time = int(time.time() * 1000)
-        print(f"Rendered frame {frame} in {end_time-start_time} ms")
+        xs, ys = np.meshgrid(xs, ys)
+        sfc = ax.plot_surface(xs, ys, zs, cmap=cm.plasma, linewidth=0, antialiased=True)
+        print(f"Rendered frame {frame}")
         return sfc,
 
-    ani = animation.FuncAnimation(fig=fig, func=update, init_func=init_func, frames=300, interval=ms_per_frame)
+    ani = animation.FuncAnimation(fig=fig, func=update, init_func=init_func, frames=30, interval=ms_per_frame)
     ani.save(filename=os.path.join("output", "single_2d_gaussian.mp4"), writer="ffmpeg")
 
 
