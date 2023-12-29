@@ -45,7 +45,6 @@ def main():
     x0_steps = np.concatenate([np.linspace(-4, 0, frames // 3), np.zeros(frames // 3), np.linspace(0, 4, frames // 3)])
     y0_steps = np.concatenate([np.linspace(-4, 0, frames // 3), np.zeros(frames // 3), np.linspace(0, 4, frames // 3)])
 
-    # fig, axs = plt.subplots(nrows=1, ncols=1, figsize=(width, height), dpi=dpi, subplot_kw={"projection": "3d"})
     fig = plt.figure()
     ax = fig.add_subplot(111, projection='3d')
 
@@ -67,7 +66,7 @@ def main():
         print(f"Rendered frame {frame}")
         return sfc,
 
-    ani = animation.FuncAnimation(fig=fig, func=update, init_func=init_func, frames=30, interval=ms_per_frame)
+    ani = animation.FuncAnimation(fig=fig, func=update, init_func=init_func, frames=300, interval=ms_per_frame)
     ani.save(filename=os.path.join("output", "single_2d_gaussian.mp4"), writer="ffmpeg")
 
 
