@@ -59,9 +59,9 @@ def main():
     def init_func():
         xs, ys, zs = two_d_gaussian(x0=x0_steps[0], y0=y0_steps[0], var_x=var_x_steps[0], var_y=var_y_steps[0], a=a_steps[0])
         xs, ys = np.meshgrid(xs, ys)
-        ax.set_xlabel("x", size=15)
-        ax.set_ylabel("y", size=15)
-        ax.set_zlabel("z", size=15)
+        ax.set_xlabel("x", size=15, color=axis_color)
+        ax.set_ylabel("y", size=15, color=axis_color)
+        ax.set_zlabel("z", size=15, color=axis_color)
         ax.set_xlim(-4., 4.)
         ax.set_ylim(-4., 4.)
         ax.set_zlim(0., 1.)
