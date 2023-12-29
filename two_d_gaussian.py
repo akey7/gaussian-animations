@@ -64,7 +64,7 @@ def main():
         print(f"Rendered frame {frame} in {end_time-start_time} ms")
         return sfc,
 
-    ani = animation.FuncAnimation(fig=fig, func=update, init_func=init_func, frames=30, interval=ms_per_frame)
+    ani = animation.FuncAnimation(fig=fig, func=update, init_func=init_func, frames=300, interval=ms_per_frame)
     ani.save(filename=os.path.join("output", "single_2d_gaussian.mp4"), writer="ffmpeg")
 
 
