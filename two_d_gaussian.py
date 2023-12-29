@@ -44,12 +44,14 @@ def main():
     frames = 300
     x0_steps = np.concatenate([np.linspace(-4, 0, frames // 3), np.zeros(frames // 3), np.linspace(0, 4, frames // 3)])
     y0_steps = np.concatenate([np.linspace(-4, 0, frames // 3), np.zeros(frames // 3), np.linspace(0, 4, frames // 3)])
+    var_x_steps = np.concatenate([np.ones(frames // 3), np.linspace(1., 7., frames // 6), np.linspace(7., 1., frames // 6), np.ones(frames // 3)])
+    var_y_steps = np.concatenate([np.ones(frames // 3), np.linspace(1., 7., frames // 6), np.linspace(7., 1., frames // 6), np.ones(frames // 3)])
 
     fig = plt.figure()
     ax = fig.add_subplot(111, projection='3d')
 
     def init_func():
-        xs, ys, zs = two_d_gaussian(x0=x0_steps[0], y0=y0_steps[0])
+        xs, ys, zs = two_d_gaussian(x0=x0_steps[0], y0=y0_steps[0], var_x=var_x_steps[0], var_y=var_y_steps[0])
         xs, ys = np.meshgrid(xs, ys)
         ax.set_xlabel("x", size=15)
         ax.set_ylabel("y", size=15)
@@ -63,7 +65,7 @@ def main():
     def update(frame):
         for coll in ax.collections:
             coll.remove()
-        xs, ys, zs = two_d_gaussian(x0=x0_steps[frame], y0=y0_steps[frame])
+        xs, ys, zs = two_d_gaussian(x0=x0_steps[frame], y0=y0_steps[frame], var_x=var_x_steps[frame], var_y=var_y_steps[frame])
         xs, ys = np.meshgrid(xs, ys)
         sfc = ax.plot_surface(xs, ys, zs, cmap=cm.plasma, linewidth=0, antialiased=True)
         print(f"Rendered frame {frame}")
