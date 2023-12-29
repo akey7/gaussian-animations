@@ -4,7 +4,6 @@ import numpy as np
 import matplotlib.animation as animation
 from matplotlib import cm
 from math import exp
-import time
 
 
 def two_d_gaussian(points = 100,
