@@ -54,6 +54,9 @@ def main():
         ax.set_xlabel("x", size=15)
         ax.set_ylabel("y", size=15)
         ax.set_zlabel("z", size=15)
+        ax.set_xlim(-4., 4.)
+        ax.set_ylim(-4., 4.)
+        ax.set_zlim(0., 1.)
         sfc = ax.plot_surface(xs, ys, zs, cmap=cm.plasma, linewidth=0, antialiased=True)
         return sfc,
 
